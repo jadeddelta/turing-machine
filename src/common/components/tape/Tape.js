@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types"
+
 import IconButton from 'material-ui/IconButton';
 import RollRight from 'material-ui/svg-icons/av/fast-forward';
 import RollLeft from 'material-ui/svg-icons/av/fast-rewind';
@@ -43,7 +45,7 @@ class Tape extends React.Component {
     };
 
     this.toggleEditTrialName = () => {
-      this.setState({editTrialName: !this.state.editTrialName})
+      this.setState({ editTrialName: !this.state.editTrialName })
     }
 
   }
@@ -52,74 +54,74 @@ class Tape extends React.Component {
   render() {
     return (
       <div >
-         <div className="card-of-tape">
+        <div className="card-of-tape">
           <Card>
-            <div className="machine-reported-error" 
-              style={{visibility:(this.props.showReportedError)?"visible":"hidden", color: this.props.messageColor}}>
+            <div className="machine-reported-error"
+              style={{ visibility: (this.props.showReportedError) ? "visible" : "hidden", color: this.props.messageColor }}>
               {this.props.machineReportError}
             </div>
 
-            {(this.props.isEdittingTrial) ? 
-              <div style={{display: "inline-block"}}>
-                  <FlatButton
-                    label={(this.props.isEdittingExpectedTape) ? "Expected Tape": "Start Tape"}
-                    labelPosition="after"
-                    primary={true}
-                    style={{
-                      color: (this.props.isEdittingExpectedTape) ? secondaryColor : primaryColor,
-                      }
-                    }
-                    onClick={this.props.changeEdittingTarget}
-                    icon={<Swap 
-                      color={(this.props.isEdittingExpectedTape) ? secondaryColor : primaryColor}/>
-                    }
-                  />
-                  {
-                    (!this.state.editTrialName) ?
+            {(this.props.isEdittingTrial) ?
+              <div style={{ display: "inline-block" }}>
+                <FlatButton
+                  label={(this.props.isEdittingExpectedTape) ? "Expected Tape" : "Start Tape"}
+                  labelPosition="after"
+                  primary={true}
+                  style={{
+                    color: (this.props.isEdittingExpectedTape) ? secondaryColor : primaryColor,
+                  }
+                  }
+                  onClick={this.props.changeEdittingTarget}
+                  icon={<Swap
+                    color={(this.props.isEdittingExpectedTape) ? secondaryColor : primaryColor} />
+                  }
+                />
+                {
+                  (!this.state.editTrialName) ?
                     <div className="TrialNameButton">
-                      <FlatButton 
-                      label={this.props.edittingTrial} 
-                      onClick={this.toggleEditTrialName} 
+                      <FlatButton
+                        label={this.props.edittingTrial}
+                        onClick={this.toggleEditTrialName}
                       />
-                      </div>:
+                    </div> :
                     <TextField
-                    id="test-name-input"
-                    inputStyle={{fontSize: 16}}
-                    style={{width:"25%"}}
-                    defaultValue={this.props.edittingTrial}
-                    onChange={this.props.setTrialName}
-                    onBlur={this.toggleEditTrialName}
-                    />  
-                    }                                       
-               <FlatButton
-                label="Save" 
-                primary={true}
-                onClick={this.props.handleSave}
-                disabled={!this.props.anyChangeInTrial}
+                      id="test-name-input"
+                      inputStyle={{ fontSize: 16 }}
+                      style={{ width: "25%" }}
+                      defaultValue={this.props.edittingTrial}
+                      onChange={this.props.setTrialName}
+                      onBlur={this.toggleEditTrialName}
+                    />
+                }
+                <FlatButton
+                  label="Save"
+                  primary={true}
+                  onClick={this.props.handleSave}
+                  disabled={!this.props.anyChangeInTrial}
                 />
                 <FlatButton
-                label="Exit" 
-                secondary={true}
-                onClick={this.props.handleExit}
+                  label="Exit"
+                  secondary={true}
+                  onClick={this.props.handleExit}
                 />
-                </div> :
-                null
+              </div> :
+              null
             }
 
             {
-              (!this.props.isEdittingTrial) ? 
-              <div className="step-count">
-                <p>Step: {this.props.stepCount}</p>
-              </div> : 
-              null
+              (!this.props.isEdittingTrial) ?
+                <div className="step-count">
+                  <p>Step: {this.props.stepCount}</p>
+                </div> :
+                null
             }
 
             <div className="whole-tape-wrapper">
               <div className="whole-tape">
                 <Head />
                 <div className="roll-left">
-                  <IconButton tooltip="Roll Left" 
-                    onClick={this.props.rollLeft} touch={true} style={TAPE_ICON_STYLES.style} 
+                  <IconButton tooltip="Roll Left"
+                    onClick={this.props.rollLeft} touch={true} style={TAPE_ICON_STYLES.style}
                     iconStyle={TAPE_ICON_STYLES.mediumIcon} tooltipPosition="bottom-left" disabled={this.props.isRunning}>
                     <RollLeft />
                   </IconButton>
@@ -129,24 +131,24 @@ class Tape extends React.Component {
                   if (i === 0) mark = MARK_FIRST;
                   if (i === this.props.cellNum - 1) mark = MARK_LAST;
                   return <Square key={standardizeCellId(i)} order={i} mark={mark} id={standardizeCellId(i)} />
-                  })}
+                })}
                 <div className="roll-right">
-                  <IconButton tooltip="Roll Right" 
-                    onClick={this.props.rollRight} touch={true} style={TAPE_ICON_STYLES.style} 
+                  <IconButton tooltip="Roll Right"
+                    onClick={this.props.rollRight} touch={true} style={TAPE_ICON_STYLES.style}
                     iconStyle={TAPE_ICON_STYLES.mediumIcon} tooltipPosition="bottom-right" disabled={this.props.isRunning}>
                     <RollRight />
                   </IconButton>
+                </div>
               </div>
-             </div>
             </div>
           </Card>
-          </div>
+        </div>
       </div>
     );
   }
 }
 
-Tape.PropTypes = {
+Tape.propTypes = {
   rollLeft: PropTypes.func.isRequired,
   rollRight: PropTypes.func.isRequired,
   showReportedError: PropTypes.bool.isRequired,

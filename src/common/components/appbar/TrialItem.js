@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
+
 import Popover from 'material-ui/Popover';
 import IconButton from 'material-ui/IconButton';
 import { ListItem } from 'material-ui/List';
@@ -30,25 +32,25 @@ import {
 import { STATUS_CODE_WAITING, STATUS_CODE_PASS, STATUS_CODE_FAIL, STATUS_CODE_TIMEOUT } from '../../reducers/trial';
 
 const iconButtonSelector = (statusCode, callBack) => {
-	switch(statusCode) {
+	switch (statusCode) {
 		case STATUS_CODE_PASS:
-			return <IconButton touch={true} tooltip="Accepted" tooltipStyles={{fontSize: 14}} 
-			tooltipPosition="bottom-left" onClick={callBack}><Pass color={passColor} /></IconButton>;
+			return <IconButton touch={true} tooltip="Accepted" tooltipStyles={{ fontSize: 14 }}
+				tooltipPosition="bottom-left" onClick={callBack}><Pass color={passColor} /></IconButton>;
 		case STATUS_CODE_FAIL:
-			return <IconButton touch={true} tooltip="Wrong" tooltipStyles={{fontSize: 14}} 
-			tooltipPosition="bottom-left" onClick={callBack}><Fail color={failColor} /></IconButton>;
+			return <IconButton touch={true} tooltip="Wrong" tooltipStyles={{ fontSize: 14 }}
+				tooltipPosition="bottom-left" onClick={callBack}><Fail color={failColor} /></IconButton>;
 		case STATUS_CODE_TIMEOUT:
-			return <IconButton touch={true} tooltip="Time Out" tooltipStyles={{fontSize: 14}} 
-			tooltipPosition="bottom-left" onClick={callBack}><Timeout color={failColor} /></IconButton>;
+			return <IconButton touch={true} tooltip="Time Out" tooltipStyles={{ fontSize: 14 }}
+				tooltipPosition="bottom-left" onClick={callBack}><Timeout color={failColor} /></IconButton>;
 		case STATUS_CODE_WAITING:
 		default:
-			return <IconButton touch={true} tooltip="Options" tooltipStyles={{fontSize: 14}} 
-			tooltipPosition="bottom-left" onClick={callBack}><MoreVertIcon /></IconButton>;
+			return <IconButton touch={true} tooltip="Options" tooltipStyles={{ fontSize: 14 }}
+				tooltipPosition="bottom-left" onClick={callBack}><MoreVertIcon /></IconButton>;
 	}
 }
 
 const processFeedback = (feedback, statusCode) => (
-	<p style={{fontSize: 10, color: (statusCode === STATUS_CODE_PASS) ? successFeedbackColor : failColor }}>{feedback}</p>
+	<p style={{ fontSize: 10, color: (statusCode === STATUS_CODE_PASS) ? successFeedbackColor : failColor }}>{feedback}</p>
 )
 
 class TrialItem extends React.Component {
@@ -75,46 +77,46 @@ class TrialItem extends React.Component {
 		};
 	}
 
-	
+
 
 	render() {
 		return (
 			<div>
-				<ListItem 
-					  innerDivStyle={{paddingBottom: 10}}
-					  primaryText={this.props.name}
-					  secondaryText={(this.props.statusCode !== STATUS_CODE_PASS && 
-					  				  this.props.statusCode !== STATUS_CODE_FAIL &&
-					  				  this.props.statusCode !== STATUS_CODE_TIMEOUT) ? 
-								  	null : 
-								  	processFeedback(this.props.feedback, this.props.statusCode)}
-					  rightIconButton={iconButtonSelector(this.props.statusCode, this.handlePopoverTouchTap)}
+				<ListItem
+					innerDivStyle={{ paddingBottom: 10 }}
+					primaryText={this.props.name}
+					secondaryText={(this.props.statusCode !== STATUS_CODE_PASS &&
+						this.props.statusCode !== STATUS_CODE_FAIL &&
+						this.props.statusCode !== STATUS_CODE_TIMEOUT) ?
+						null :
+						processFeedback(this.props.feedback, this.props.statusCode)}
+					rightIconButton={iconButtonSelector(this.props.statusCode, this.handlePopoverTouchTap)}
 				/>
-		        <Popover
-		          open={this.state.optionMenu}
-		          anchorEl={this.state.anchorEl}
-		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-		          onRequestClose={this.handlePopoverRequestClose}
-		        >
-		          <Menu>
-		            <MenuItem primaryText="Run" leftIcon={<Run color={runButtonColor}/>} onClick={() => {this.props.runTrial(); this.handlePopoverRequestClose();}} />
-		            <MenuItem primaryText="Edit" leftIcon={<Edit color={editButtonColor}/>} onClick={() => {this.props.editTrial(); this.handlePopoverRequestClose();}} />
-		            <Divider />
-		            <MenuItem primaryText="Load" leftIcon={<Load color={loadColor}/>} onClick={() => {this.props.loadTrial(); this.handlePopoverRequestClose();}} />
-		            <MenuItem primaryText="Download" leftIcon={<Download color={downloadColor}/>} onClick={() => {this.props.downloadTrial(); this.handlePopoverRequestClose();}} />
-		            
-		            <Divider />
-		            <MenuItem primaryText="Delete" leftIcon={<Delete color={deleteButtonColor}/>} onClick={() => {this.props.deleteTrial(); this.handlePopoverRequestClose();}}/>
-		          </Menu>
-		        </Popover>
-	        </div>	
+				<Popover
+					open={this.state.optionMenu}
+					anchorEl={this.state.anchorEl}
+					anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+					targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+					onRequestClose={this.handlePopoverRequestClose}
+				>
+					<Menu>
+						<MenuItem primaryText="Run" leftIcon={<Run color={runButtonColor} />} onClick={() => { this.props.runTrial(); this.handlePopoverRequestClose(); }} />
+						<MenuItem primaryText="Edit" leftIcon={<Edit color={editButtonColor} />} onClick={() => { this.props.editTrial(); this.handlePopoverRequestClose(); }} />
+						<Divider />
+						<MenuItem primaryText="Load" leftIcon={<Load color={loadColor} />} onClick={() => { this.props.loadTrial(); this.handlePopoverRequestClose(); }} />
+						<MenuItem primaryText="Download" leftIcon={<Download color={downloadColor} />} onClick={() => { this.props.downloadTrial(); this.handlePopoverRequestClose(); }} />
+
+						<Divider />
+						<MenuItem primaryText="Delete" leftIcon={<Delete color={deleteButtonColor} />} onClick={() => { this.props.deleteTrial(); this.handlePopoverRequestClose(); }} />
+					</Menu>
+				</Popover>
+			</div>
 		)
 	}
 }
 
 
-TrialItem.PropTypes = {
+TrialItem.propTypes = {
 	id: PropTypes.string.isRequried,
 
 	steps: PropTypes.number.isRequried,

@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types"
+
 import Draggable from 'react-draggable';
 import AutoComplete from 'material-ui/AutoComplete';
 import {
@@ -18,41 +20,41 @@ class Head extends React.Component {
         <Draggable
           axis="x"
           handle=".header"
-          position={{x: this.props.head_position, y: 0}}
+          position={{ x: this.props.head_position, y: 0 }}
           grid={[HEAD_MOVE_INTERVAL, 0]}
           zIndex={100}
-          bounds={{left: HEAD_LEFT_BOUNDARY, top: 0, right: this.props.rightBoundary}} 
+          bounds={{ left: HEAD_LEFT_BOUNDARY, top: 0, right: this.props.rightBoundary }}
           onStart={this.props.handleStart}
           onDrag={this.props.handleDrag}
           onStop={this.props.handleStop}
           disabled={this.props.isRunning}
-          >
+        >
           <div className="header">
-            <div className="hair" style={(this.props.hair_styles)? (this.props.hair_styles) : INIT_HAIR_STYLES} />
-              <AutoComplete 
-                className="head"
-                filter={this.props.filter}
-                id={HEAD_INPUT_ID}
-                underlineStyle={{display: 'none'}}
-                searchText={this.props.internalState}
-                dataSource={this.props.dataSource} 
-                inputStyle={{textAlign: 'center', color: this.props.fontColor, fontFamily: "Roboto Mono"}}
-                style={{width: 150}}
-                textFieldStyle={(this.props.head_styles)?(generate_head_style(this.props.head_styles)):generate_head_style()}
-                onUpdateInput={this.props.onUpdateInput}
-                maxLength={HEAD_INPUT_MAXLENGTH}
-                disabled={this.props.isRunning || this.props.isEdittingExpectedTape}
-                />
+            <div className="hair" style={(this.props.hair_styles) ? (this.props.hair_styles) : INIT_HAIR_STYLES} />
+            <AutoComplete
+              className="head"
+              filter={this.props.filter}
+              id={HEAD_INPUT_ID}
+              underlineStyle={{ display: 'none' }}
+              searchText={this.props.internalState}
+              dataSource={this.props.dataSource}
+              inputStyle={{ textAlign: 'center', color: this.props.fontColor, fontFamily: "Roboto Mono" }}
+              style={{ width: 150 }}
+              textFieldStyle={(this.props.head_styles) ? (generate_head_style(this.props.head_styles)) : generate_head_style()}
+              onUpdateInput={this.props.onUpdateInput}
+              maxLength={HEAD_INPUT_MAXLENGTH}
+              disabled={this.props.isRunning || this.props.isEdittingExpectedTape}
+            />
             <div className="neck" />
             <div className="shoulder" />
           </div>
         </Draggable>
       </div>
-      );
+    );
   }
 }
 
-Head.PropTypes = {
+Head.propTypes = {
   handleStart: PropTypes.func.isRequired,
   handleDrag: PropTypes.func.isRequired,
   handleStop: PropTypes.func.isRequired,

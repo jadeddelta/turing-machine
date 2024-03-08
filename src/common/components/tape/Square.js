@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import { standardizeCellId } from '../../reducers/tape';
 import { highlightCellAtAction } from '../../actions/tapeActions';
 
@@ -6,7 +7,7 @@ import { highlightCellAtAction } from '../../actions/tapeActions';
 class Square extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { style: { backgroundColor: "#fff" }};
+    this.state = { style: { backgroundColor: "#fff" } };
 
     this.onFocus = () => {
       this.props.dispatch(highlightCellAtAction(this.props.order));
@@ -19,34 +20,34 @@ class Square extends React.Component {
     this.onMouseEnter = () => {
       let style;
       if (this.state.style.backgroundColor !== "#87dbff") {
-        style = {style: { backgroundColor: "#f1fc7e" }};
+        style = { style: { backgroundColor: "#f1fc7e" } };
       } else {
         style = this.state.style;
       }
-        
+
       this.setState(style);
     }
     this.onMouseLeave = () => {
       this.setState(
-        (this.state.style.backgroundColor === "#f1fc7e") ? 
-        {style: { backgroundColor: "#fff" }} : 
-        this.state.style
+        (this.state.style.backgroundColor === "#f1fc7e") ?
+          { style: { backgroundColor: "#fff" } } :
+          this.state.style
       );
     }
   }
 
   render() {
-  	// this.props.read[this.props.order] = "";
+    // this.props.read[this.props.order] = "";
     return (
-      <input 
+      <input
         className="square"
         style={
           (this.props.id === standardizeCellId(this.props.highlightedCellOrder)) ?
-          {"backgroundColor": "#87dbff"} : 
-          this.state.style
+            { "backgroundColor": "#87dbff" } :
+            this.state.style
         }
         onKeyDown={this.props.onKeyDown}
-        value={(this.props.val)?this.props.val:""}
+        value={(this.props.val) ? this.props.val : ""}
         id={this.props.id}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
@@ -57,7 +58,7 @@ class Square extends React.Component {
   }
 }
 
-Square.PropTypes = {
+Square.propTypes = {
   onKeyDown: PropTypes.func.isRequired,
   order: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
