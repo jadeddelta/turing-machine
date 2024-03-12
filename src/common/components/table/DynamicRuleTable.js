@@ -1,6 +1,7 @@
 import React from 'react';
-import FlatButton from 'material-ui/RaisedButton';
-import { Card, CardActions } from 'material-ui/Card';
+
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card';
 
 import RowItem from '../../containers/table/RowItemContainer';
 import withDragDropContext from './withDragDropContext';
@@ -70,7 +71,13 @@ class DynamicRuleTable extends React.Component {
                   }
                 </div>
                 <div style={{...style.AddButtonContainer}}>
-                  <FlatButton label="Add Rule" primary={true} onClick={this.props.addRow}/>
+                  <Button 
+                    variant="contained"
+                    color="primary"
+                    onClick={this.props.addRow}
+                  >
+                    ADD RULE  
+                  </Button>
                </div> 
           </Card>
       </div>

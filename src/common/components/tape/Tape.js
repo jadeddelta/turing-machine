@@ -1,23 +1,19 @@
 import React from 'react';
 import PropTypes from "prop-types"
 
-import IconButton from 'material-ui/IconButton';
-import RollRight from 'material-ui/svg-icons/av/fast-forward';
-import RollLeft from 'material-ui/svg-icons/av/fast-rewind';
+import IconButton from '@material-ui/core/IconButton';
+import RollRight from '@material-ui/icons/FastForward';
+import RollLeft from '@material-ui/icons/FastRewind';
 
 import { TAPE_ICON_STYLES } from '../../constants/components/Tape';
-import { Card } from 'material-ui/Card';
 import { standardizeCellId } from '../../reducers/tape';
 import Square from '../../containers/tape/SquareContainer';
 import Head from '../../containers/tape/HeadContainer';
 
-import Swap from 'material-ui/svg-icons/action/autorenew';
-import FlatButton from 'material-ui/FlatButton';
-import Divider from 'material-ui/Divider';
-import List from 'material-ui/List';
-import MenuItem from 'material-ui/MenuItem';
-import Subheader from 'material-ui/Subheader';
-import TextField from 'material-ui/TextField';
+import Card from '@material-ui/core/Card';
+import Swap from '@material-ui/icons/Autorenew';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import {
   cyan500 as primaryColor,
@@ -63,7 +59,7 @@ class Tape extends React.Component {
 
             {(this.props.isEdittingTrial) ?
               <div style={{ display: "inline-block" }}>
-                <FlatButton
+                <Button
                   label={(this.props.isEdittingExpectedTape) ? "Expected Tape" : "Start Tape"}
                   labelPosition="after"
                   primary={true}
@@ -79,10 +75,11 @@ class Tape extends React.Component {
                 {
                   (!this.state.editTrialName) ?
                     <div className="TrialNameButton">
-                      <FlatButton
-                        label={this.props.edittingTrial}
+                      <Button
                         onClick={this.toggleEditTrialName}
-                      />
+                      >
+                        {this.props.edittingTrial}
+                      </Button>
                     </div> :
                     <TextField
                       id="test-name-input"
@@ -93,17 +90,19 @@ class Tape extends React.Component {
                       onBlur={this.toggleEditTrialName}
                     />
                 }
-                <FlatButton
-                  label="Save"
-                  primary={true}
+                <Button
+                  color="primary"
                   onClick={this.props.handleSave}
                   disabled={!this.props.anyChangeInTrial}
-                />
-                <FlatButton
-                  label="Exit"
-                  secondary={true}
+                >
+                  Save
+                </Button>
+                <Button
+                  color="secondary"
                   onClick={this.props.handleExit}
-                />
+                >
+                  Exit
+                </Button>
               </div> :
               null
             }
@@ -120,9 +119,14 @@ class Tape extends React.Component {
               <div className="whole-tape">
                 <Head />
                 <div className="roll-left">
-                  <IconButton tooltip="Roll Left"
-                    onClick={this.props.rollLeft} touch={true} style={TAPE_ICON_STYLES.style}
-                    iconStyle={TAPE_ICON_STYLES.mediumIcon} tooltipPosition="bottom-left" disabled={this.props.isRunning}>
+                  <IconButton 
+                    tooltip="Roll Left"
+                    onClick={this.props.rollLeft} 
+                    touch={true} 
+                    style={TAPE_ICON_STYLES.style}
+                    iconStyle={TAPE_ICON_STYLES.mediumIcon} 
+                    tooltipPosition="bottom-left" 
+                    disabled={this.props.isRunning}>
                     <RollLeft />
                   </IconButton>
                 </div>
@@ -133,9 +137,14 @@ class Tape extends React.Component {
                   return <Square key={standardizeCellId(i)} order={i} mark={mark} id={standardizeCellId(i)} />
                 })}
                 <div className="roll-right">
-                  <IconButton tooltip="Roll Right"
-                    onClick={this.props.rollRight} touch={true} style={TAPE_ICON_STYLES.style}
-                    iconStyle={TAPE_ICON_STYLES.mediumIcon} tooltipPosition="bottom-right" disabled={this.props.isRunning}>
+                  <IconButton 
+                    tooltip="Roll Right"
+                    onClick={this.props.rollRight} 
+                    touch={true} 
+                    style={TAPE_ICON_STYLES.style}
+                    iconStyle={TAPE_ICON_STYLES.mediumIcon} 
+                    tooltipPosition="bottom-right" 
+                    disabled={this.props.isRunning}>
                     <RollRight />
                   </IconButton>
                 </div>

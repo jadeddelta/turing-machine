@@ -5,7 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Router, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import MuiThemeProviderV0 from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {
+	cyan,
+	pink
+} from '@material-ui/core/colors';
 
 import App from '../common/containers/AppContainer';
 import PageNotFound from '../common/components/PageNotFound';
@@ -35,17 +41,29 @@ if (preloadedState && preloadedState.constructor === Object && Object.keys(prelo
 	store.dispatch(initMachineAction());
 }
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: cyan[500]
+		},
+		secondary: {
+			main: pink[400]
+		}
+	}
+});
 
 ReactDOM.render(
 	<Provider store={store}>
-		<MuiThemeProvider>
-			<Router history={createBrowserHistory()}>
-				<div>
-					<Route exact path="/" component={App} />
-					<Route exact path="/:id" component={App} />
-					<Route exact path="/error/404" component={PageNotFound} />
-				</div>
-			</Router>
+		<MuiThemeProvider theme={theme}>
+			<MuiThemeProviderV0>
+				<Router history={createBrowserHistory()}>
+					<div>
+						<Route exact path="/" component={App} />
+						<Route exact path="/:id" component={App} />
+						<Route exact path="/error/404" component={PageNotFound} />
+					</div>
+				</Router>
+			</MuiThemeProviderV0>
 		</MuiThemeProvider>
 	</Provider>,
 	document.getElementById('container')

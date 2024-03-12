@@ -1,7 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom'
-import IconButton from 'material-ui/IconButton';
-import Avatar from 'material-ui/Avatar';
+
+import Avatar from '@material-ui/core/Avatar';
 import DeleteRowButton from '../../containers/table/DeleteRowButtonContainer';
 import SwitchDirectionButton from '../../containers/table/SwitchDirectionButtonContainer';
 import AutoCompleteField from '../../containers/table/AutoCompleteFieldContainer';
@@ -9,7 +9,8 @@ import AutoCompleteField from '../../containers/table/AutoCompleteFieldContainer
 import flow from 'lodash/flow';
 import { DropTarget, DragSource } from 'react-dnd';
 
-import DragHandleIcon from 'material-ui/svg-icons/navigation/menu';
+import { cyan } from '@material-ui/core/colors';
+
 
 const style = {
 	root: (isHighlighted, isDragging) => ({
@@ -24,7 +25,8 @@ const style = {
 		marginBottom: '-25px'
 	},
 	Avatar: {
-		backgroundColor: '#2196F3',
+		backgroundColor: cyan[500],
+		color: '#fff',
 		size: 25,
 	}
 }
@@ -127,9 +129,7 @@ class RowItem extends React.Component {
 				{
 				connectDragSource(
 					<div style={{...style.buttonContainer}}>
-						<Avatar
-							{...style.Avatar}
-						>
+						<Avatar style={style.Avatar}>
 							{rowNum}
 						</Avatar>
 					</div>

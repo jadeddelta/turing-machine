@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-	grey50,
-	cyan500
-} from 'material-ui/styles/colors';
+	grey,
+	cyan
+} from "@material-ui/core/colors";
 
 class AppNavBar extends Component {
 	render() {
 		return (
-		<div style={{backgroundColor: cyan500, width: "100%", height: 50}}>
-			<p style={{color: grey50, fontSize: 24, paddingTop: 7, paddingLeft: 10, fontFamily: 'Roboto'}}>
+		<div style={{backgroundColor: cyan[500], width: "100%", height: 50}}>
+			<p style={{color: grey[50], fontSize: 24, paddingTop: 7, paddingLeft: 10, fontFamily: 'Roboto'}}>
 				Turing Machine Simulator
 			</p>
 		</div>

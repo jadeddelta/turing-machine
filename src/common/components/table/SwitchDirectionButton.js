@@ -1,5 +1,6 @@
 import React from 'react';
-import MenuItem from 'material-ui/MenuItem';
+
+import MenuItem from '@material-ui/core/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
 const style = {
@@ -17,8 +18,12 @@ class SwitchDirectionButton extends React.Component {
 
 	render() {
     let items = [
-        <MenuItem key={`toggle-${this.props.id}}-1`} value={true}  primaryText="Left"/>,
-        <MenuItem key={`toggle-${this.props.id}}-2`} value={false}  primaryText="Right"/>
+        <MenuItem key={`toggle-${this.props.id}}-1`} value={true}>
+          Left
+        </MenuItem>,
+        <MenuItem key={`toggle-${this.props.id}}-2`} value={false}>
+          Right
+        </MenuItem>
     ];
 
     return (

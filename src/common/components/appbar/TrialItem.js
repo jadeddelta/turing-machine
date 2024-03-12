@@ -29,7 +29,13 @@ import {
 	teal300 as downloadColor,
 } from 'material-ui/styles/colors';
 
-import { STATUS_CODE_WAITING, STATUS_CODE_PASS, STATUS_CODE_FAIL, STATUS_CODE_TIMEOUT } from '../../reducers/trial';
+
+import { 
+	STATUS_CODE_WAITING, 
+	STATUS_CODE_PASS, 
+	STATUS_CODE_FAIL, 
+	STATUS_CODE_TIMEOUT 
+} from '../../reducers/trial';
 
 const iconButtonSelector = (statusCode, callBack) => {
 	switch (statusCode) {

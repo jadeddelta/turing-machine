@@ -1,13 +1,13 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
-import Divider from 'material-ui/Divider';
-import Drawer from 'material-ui/Drawer';
-import Subheader from 'material-ui/Subheader';
-import { List } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import MenuItem from 'material-ui/MenuItem';
+
+import { Dialog } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { ProgressCircle } from './appbar/AppBar';
 import AppBar from '../containers/appbar/AppBarContainer';
@@ -86,12 +86,14 @@ class App extends React.Component {
 
 	render() {
 		const actions = [
-				      	<FlatButton
-				        label="Okay"
-				        primary={true}
-				        keyboardFocused={true}
-				        onClick={this.handleDialogClose}
-				      	/>
+			<Button
+			variant="contained"
+			color="primary"
+			keyboardFocused={true}
+			onClick={this.handleDialogClose}
+			>
+				OKAY
+			</Button>
     	];
 
 		return (
@@ -121,7 +123,9 @@ class App extends React.Component {
 		          open={this.state.trialDrawerToggle}
 		          onRequestChange={(open) => this.setState({trialDrawerToggle: open})}
 		        >
-			        <Subheader style={DRAWER_STYLE.subheadStyle}>{DRAWER_STYLE.subheadText}</Subheader>
+			        <ListSubheader style={DRAWER_STYLE.subheadStyle}>
+						{DRAWER_STYLE.subheadText}
+					</ListSubheader>
 			        <Divider />
 			        <div style={DRAWER_STYLE.listStyle}>
 			        <List>
@@ -136,21 +140,28 @@ class App extends React.Component {
 			        <div style={DRAWER_STYLE.controlStyle}>
 			        <Divider />
 			        {(this.props.isRunningTrial) ?
-						<MenuItem primaryText={DRAWER_STYLE.buttons.runTrial.runningLabel} leftIcon={ProgressCircle()} /> :
-						<MenuItem primaryText={DRAWER_STYLE.buttons.runTrial.label} leftIcon={DRAWER_STYLE.buttons.runTrial.icon}
-				 			onClick={this.props.handleRunAllTests}/>}
+						<MenuItem>
+							{ProgressCircle()} {DRAWER_STYLE.buttons.runTrial.runningLabel}
+						</MenuItem> :
+						<MenuItem onClick={this.props.handleRunAllTests}>
+							{DRAWER_STYLE.buttons.runTrial.icon} {DRAWER_STYLE.buttons.runTrial.label} 	
+						</MenuItem>}
 
-			        <MenuItem primaryText={DRAWER_STYLE.buttons.addTrial.label} leftIcon={DRAWER_STYLE.buttons.addTrial.icon}
-			         onClick={this.props.handleAddTest}/>
+			        <MenuItem onClick={this.props.handleAddTest}>
+						{DRAWER_STYLE.buttons.addTrial.icon} {DRAWER_STYLE.buttons.addTrial.label}
+					</MenuItem>
 			        <Divider />
-			        <MenuItem primaryText={DRAWER_STYLE.buttons.uploadTests.label} 
-			        	leftIcon={DRAWER_STYLE.buttons.uploadTests.icon} 
-			        	onClick={this.props.uploadTests} />
-			        <MenuItem primaryText={DRAWER_STYLE.buttons.saveTests.label} leftIcon={DRAWER_STYLE.buttons.saveTests.icon} onClick={this.props.downloadAllTests} />
+			        <MenuItem onClick={this.props.uploadTests}>
+						{DRAWER_STYLE.buttons.uploadTests.icon} {DRAWER_STYLE.buttons.uploadTests.label}
+					</MenuItem>
+			        <MenuItem onClick={this.props.downloadAllTests}>
+						{DRAWER_STYLE.buttons.saveTests.icon} {DRAWER_STYLE.buttons.saveTests.label}
+					</MenuItem>
 
 			        <Divider />
-			        <MenuItem primaryText={DRAWER_STYLE.buttons.deleteTests.label} leftIcon={DRAWER_STYLE.buttons.deleteTests.icon}
-			         onClick={this.props.handleDeleteTests}/>
+			        <MenuItem onClick={this.props.handleDeleteTests}>
+						{DRAWER_STYLE.buttons.deleteTests.icon} {DRAWER_STYLE.buttons.deleteTests.label}
+					</MenuItem>
 			        </div>
 		        </Drawer>
 

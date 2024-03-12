@@ -1,6 +1,7 @@
 import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import Delete from 'material-ui/svg-icons/action/delete-forever';
+
+import { IconButton } from '@material-ui/core';
+import Delete from '@material-ui/icons/DeleteForever';
 
 const style = {
   icon: {
